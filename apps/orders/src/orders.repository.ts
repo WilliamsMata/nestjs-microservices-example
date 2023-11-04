@@ -16,4 +16,8 @@ export class OrdersRepository extends AbstractRepository<Order> {
   ) {
     super(orderModule, connection);
   }
+
+  async createOrder(order: Order) {
+    return this.create(order);
+  }
 }
