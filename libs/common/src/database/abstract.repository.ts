@@ -80,6 +80,14 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return this.model.find(filterQuery, {}, { lean: true });
   }
 
+  async findById(id: string) {
+    return this.findOne({ _id: id });
+  }
+
+  async findByIds(ids: string[]) {
+    return this.find({ _id: { $in: ids } });
+  }
+
   async startTransaction(): Promise<ClientSession> {
     const session = await this.connection.startSession();
     session.startTransaction();
